@@ -1,3 +1,4 @@
 /node_modules
 /server/node_modules
-/clinte-mobile/node_modules
+/client-mobile/node_modules
+/client-web/node_modules
