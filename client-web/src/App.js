@@ -20,14 +20,30 @@ function App() {
         }>
         <BrowserRouter>
           <Routes>
+            {/* <Route path='/'>
+              <Route index element={<Home/>}/>
+              <Route path='create' element={<Login/>}/>
+            </Route> */}
             <Route 
-              path='/' 
+              path='/home' 
               element={
                 (!userToken)?
                   <Home  setUserToken={setUserToken} userToken={userToken}/> :
                   <Navigate replace to="/login"/>
-              }
-              />
+              }>
+                <Route path='add-word' element={<>asdas</>}/>
+                <Route path='repeat' element={<></>}/>
+                <Route path='test' element={<></>}/>
+                <Route path='memorized' element={<></>}/>
+                <Route path='all-repeat' element={<></>}/>
+                <Route path='make-sentence' element={<></>}/>
+                <Route path='chart' element={<></>}/>
+                <Route path='translate' element={<></>}/>
+                <Route path='find-word-to-sentens' element={<></>}/>
+                <Route path='find-word-to-img' element={<></>}/>
+                <Route path='user-reting' element={<></>}/>
+                <Route path='info' element={<></>}/>
+              </Route>
               <Route path='/login' element={<Login setUserToken={setUserToken}/>} />
               <Route path='/regis' element={<Regis setUserToken={setUserToken}/>} />
           </Routes>
