@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "clinte-mobile",
-    "slug": "clinte-mobile",
+    "name": "word-memorization",
+    "slug": "word-memorization",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
