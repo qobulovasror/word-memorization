@@ -12,14 +12,15 @@ export default function MainScreen({ navigation }) {
           <Text style={{fontSize: 15}}>Kunlik so'z o'rganish</Text>
           <View style={[defaultStyle.column, mainStyle.itemGroup]}>
             <TouchableOpacity style={[defaultStyle.row, mainStyle.item]} 
-              onPress={()=>navigation.navigate("So'z qo'shish va o'rganish")}>
+              onPress={()=>navigation.navigate("So'z qo'shish")}>
               <AntDesign name="pluscircleo" size={25} color={"#0f0"} />
-              <Text style={{marginStart: 10, fontSize: 20}}>Yangi so'z qo'shish va o'rganish</Text>
+              <Text style={{marginStart: 10, fontSize: 20}}>So'z qo'shish va qo'shilgan so'zlar</Text>
             </TouchableOpacity>
             <View style={mainStyle.hr}></View>
-            <TouchableOpacity style={[defaultStyle.row, mainStyle.item]}>
+            <TouchableOpacity style={[defaultStyle.row, mainStyle.item]}
+              onPress={()=>navigation.navigate("Bugungi so'zlarni o'rganish")}>
               <Feather name="refresh-ccw" size={25} color={"#00f"} />
-              <Text style={{marginStart: 10, fontSize: 20}}>Bugungi so'zlarni takrorlash</Text>
+              <Text style={{marginStart: 10, fontSize: 20}}>Bugungi so'zlarni o'rganish</Text>
             </TouchableOpacity>
             <View style={mainStyle.hr}></View>
             <TouchableOpacity style={[defaultStyle.row, mainStyle.item]}>
