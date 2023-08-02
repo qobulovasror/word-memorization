@@ -36,4 +36,13 @@ export const defaultStyle = StyleSheet.create({
         borderColor: "#000",
         borderWidth: 0.5
     },
+    modalBack: {
+        width: '100%',
+        height: '100%',
+        backgroundColor: '#1F1F1F81',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        zIndex: 10,
+    }
   });

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Text, View, TextInput, ScrollView, Switch } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Text, View, TextInput, ScrollView, FlatList, Modal, Pressable } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 import { defaultStyle } from "../../assets/styles/defaultStyle";
@@ -7,6 +7,7 @@ import { addwords, addedList } from "../../assets/styles/addwords";
 import { Feather, Ionicons } from "@expo/vector-icons";
 
 export default function AddWords() {
+  const [modalVisible, setModalVisible] = useState(false);
   const [mode, setMode] = useState('add');
   const [list, setList] = useState([]);
   const switchHandler = (mode) => {
@@ -15,6 +16,12 @@ export default function AddWords() {
   const selectedStyle = { backgroundColor: '#ccc', borderColor: "#fff" }
   return (
     <View style={defaultStyle.container}>
+      {
+        (modalVisible) &&
+        <View style={defaultStyle.modalBack}>
+          <TouchableOpacity style={{width: '100%', height: '100%'}} onPress={()=>setModalVisible(!modalVisible)}/>
+        </View>
+      }
       <View style={[defaultStyle.row, defaultStyle.around, defaultStyle.switchMode]}>
         <TouchableOpacity style={[defaultStyle.switchBtn, (mode=='add')? selectedStyle: ""]} 
           onPress={()=>switchHandler('add')}>
@@ -30,43 +37,47 @@ export default function AddWords() {
           <Add 
             list={list} 
             setList={setList}/> :
-          <AddeddList/>
+          <AddeddList 
+            list={list} 
+            setList={setList}
+            modalVisible={modalVisible} 
+            setModalVisible={setModalVisible}/>
       }
     </View>
   );
 }
 
 const Add = (props) => {
-  const {list, setList} = props;
+  const {list, setList, edit} = props;
   const [exampleCount, setExampleCount] = useState(0)
+
   const [word, setWord] = useState({
-    name: "",
+    name: '',
     transcription: "",
     translation:"",
-    examples: [
-      {
-        example: '',
-        meaning:'',
-      },
-      {
-        example: '',
-        meaning:'',
-      },
-      {
-        example: '',
-        meaning:'',
-      }
-    ],
+    example: "",
+    exampleMeaning: ""
   })
   const addWordHandler = () => {
     if(word && word.name && word.translation){
-      setList([...list, {name, transcription, translation, examples}])
-      console.log(list);
+      setList([...list, {...word, id: Date.now()}])
+      setWord({
+        name: "",
+        transcription: "",
+        translation:"",
+        example: "",
+        exampleMeaning: ""
+      })
     }else{
       alert("Kerakli maydonlar to'ldirilmagan")
     }
   }
-
+  const handleChange = (field, value) => {
+    setWord((prevData) => ({
+      ...prevData,
+      [field]: value,
+    }));
+  }
   const addExample = () => {
     if(exampleCount<1){
       setExampleCount(exampleCount+1)
@@ -77,25 +88,17 @@ const Add = (props) => {
       setExampleCount(exampleCount-1)
     }
   }
-  const exampleHandler = (value, target) => {
-    if(target == 11){
-      setWord({...word, examples: [ {example: word.examples[0].example+value}, word.examples[1], word.examples[2]]})
+  useEffect(()=>{
+    if(edit){
+      setWord({
+        name: edit.name | '',
+        transcription: edit.transcription,
+        translation: edit.translation,
+        example: edit.example,
+        exampleMeaning: edit.exampleMeaning
+      })
     }
-    else if(target == 12){
-      setWord({...word, examples: [ {example: word.examples[0].meaning+value}, word.examples[1], word.examples[2]]})
-    }
-
-    else if(target == 21){
-      setWord({...word, examples: [ word.examples[0], {example: word.examples[1].example+value}, word.examples[2]]})
-    }else if(target == 22){
-      setWord({...word, examples: [ word.examples[0], {example: word.examples[1].meaning+value}, word.examples[2]]})
-    }
-    else if(target == 31){
-      setWord({...word, examples: [ word.examples[0], word.examples[1], {example: word.examples[2].example+value}]})
-    }else if(target == 32){
-      setWord({...word, examples: [ word.examples[0], word.examples[1], {example: word.examples[2].meaning+value}]})
-    }
-  }
+  }, [])
   return (
     <ScrollView style={{position: 'relative'}}>
       <View style={{margin: 10}}>
@@ -110,7 +113,8 @@ const Add = (props) => {
           <TextInput 
             placeholder="English word"
             style={addwords.input} 
-            onChangeText={value=>setWord({...word, name: word.name+value})}
+            value={word.name}
+            onChangeText={(text) => handleChange('name', text)}
             />
         </View>
         <View style={defaultStyle.column}>
@@ -118,14 +122,16 @@ const Add = (props) => {
           <TextInput 
             placeholder="Transcription" 
             style={addwords.input} 
-            onChangeText={value=>setWord({...word, transcription: word.transcription+value})}/>
+            value={word.transcription}
+            onChangeText={(text) => handleChange('transcription', text)}/>
         </View>
         <View style={defaultStyle.column}>
           <Text style={{fontSize: 18}}>Tarjimasi: </Text>
           <TextInput 
             placeholder="Translation" 
             style={addwords.input} 
-            onChangeText={value=>setWord({...word, translation: word.translation+value})}/>
+            value={word.translation}
+            onChangeText={(text) => handleChange('translation', text)}/>
         </View>
       </View>
       <View style={[defaultStyle.row, defaultStyle.between]}>
@@ -140,32 +146,17 @@ const Add = (props) => {
         (exampleCount>0)? 
         <View style={addwords.exampleGroup}>
           <View style={defaultStyle.column}>
-            <Text>Namuna 1</Text>
+            <Text>Namuna</Text>
             <TextInput 
               placeholder="Inglizcha matin" 
               style={addwords.input}
-              onChangeText={value=>exampleHandler(value, 11)}/>
-            <TextInput placeholder="Tarjimasi" style={addwords.input} onChangeText={value=>exampleHandler(value, 12)}/>
-          </View>
-        </View> : ""
-      }
-      {
-        (exampleCount>1)? 
-        <View style={addwords.exampleGroup}>
-          <View style={defaultStyle.column}>
-            <Text>Namuna 2</Text>
-            <TextInput placeholder="Inglizcha matin" style={addwords.input} onChangeText={value=>exampleHandler(value, 21)}/>
-            <TextInput placeholder="Tarjimasi" style={addwords.input} onChangeText={value=>exampleHandler(value, 22)}/>
-          </View>
-        </View> : ""
-      }
-      {
-        (exampleCount>2)? 
-        <View style={addwords.exampleGroup}>
-          <View style={defaultStyle.column}>
-            <Text>Namuna 3</Text>
-            <TextInput placeholder="Inglizcha matin" style={addwords.input} onChangeText={value=>exampleHandler(value, 31)}/>
-            <TextInput placeholder="Tarjimasi" style={addwords.input} onChangeText={value=>exampleHandler(value, 32)}/>
+              value={word.example}
+              onChangeText={(text) => handleChange('example', text)}/>
+            <TextInput 
+              placeholder="Tarjimasi" 
+              style={addwords.input} 
+              value={word.exampleMeaning}
+              onChangeText={(text) => handleChange('exampleMeaning', text)}/>
           </View>
         </View> : ""
       }
@@ -174,11 +165,74 @@ const Add = (props) => {
   )
 }
 
-const AddeddList = () => {
-
+const AddeddList = (props) => {
+  const {list, setList, modalVisible, setModalVisible} = props;
+  const moreFunHandler = (item) => {
+    setModalVisible(true)
+  }
   return (
-      <View style={{width: '100%', height: '100%', margin: 10}}>
-        
+      <View style={addedList.itemGroup}>
+        {
+          (list.length>0) ? 
+          <View>
+            { modalVisible &&
+              <Modal
+                animationType="slide"
+                transparent={true}
+                visible={modalVisible}
+                style={addedList.moreFun}
+                onRequestClose={() => {
+                  Alert.alert('Modal has been closed.');
+                }}>
+              <MoreFun setModalVisible={setModalVisible}/>
+            </Modal>
+            }
+            <FlatList
+              data={list}
+              renderItem={({item}) => (
+                <View style={[addedList.item, defaultStyle.row, defaultStyle.between]}>
+                  <View>
+                    <Text style={addedList.itemName}>So'z: {item.name}</Text>
+                    <Text style={addedList.itemTranslation}>Tarjimasi: {item.translation}</Text>
+                    <Text style={addedList.itemTranscription}>Transkripsiyasi: {item.transcription}</Text>
+                    <Text style={addedList.example}>Namuna: {item.example}</Text>
+                    <Text style={addedList.exampleMeang}>Namuna tarjimasi: {item.exampleMeaning}</Text>
+                  </View>
+                  <TouchableOpacity style={addedList.moreBtn} onPress={()=>moreFunHandler(item)}>
+                    <Feather name="more-horizontal" size={25} color={"#000"} />
+                  </TouchableOpacity>
+                </View>
+              )}
+              keyExtractor={item => item.id}
+            /> 
+          </View>
+          :
+          <Text style={addedList.defaultMsg}>Ro'yxat bo'sh</Text>
+        }
       </View>
+  )
+}
+
+const MoreFun = (item) => {
+  return (
+    <View>
+      <Text style={[defaultStyle.tCenter, {fontSize: 20}]}>Qo'shimcha: "{item.name}"</Text>
+      <TouchableOpacity style={[addedList.moreListBtn, defaultStyle.row]}>
+        <Feather name="volume-2" size={25} color={"#000"} />
+        <Text style={{fontSize: 18, marginStart: 10}}>Tinglash</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={[addedList.moreListBtn, defaultStyle.row]}>
+        <Feather name="copy" size={25} color={"#000"} />
+        <Text style={{fontSize: 18, marginStart: 10}}>Nusxalash</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={[addedList.moreListBtn, defaultStyle.row]}>
+        <Feather name="edit" size={25} color={"#000"} />
+        <Text style={{fontSize: 18, marginStart: 10}}>O'zgartirish</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={[addedList.moreListBtn, defaultStyle.row]}>
+        <Feather name="trash" size={25} color={"#000"} />
+        <Text style={{fontSize: 18, marginStart: 10}}>O'chirish</Text>
+      </TouchableOpacity>
+    </View>
   )
 }
