@@ -7,21 +7,24 @@ import { addwords, addedList } from "../../assets/styles/addwords";
 import { Feather, Ionicons } from "@expo/vector-icons";
 
 export default function AddWords() {
-  const [modalVisible, setModalVisible] = useState(false);
   const [mode, setMode] = useState('add');
-  const [list, setList] = useState([]);
+  const [list, setList] = useState([
+    {
+      id: Date.now(),
+      name: 'word',
+      transcription: "",
+      translation:"so'z",
+      example: "",
+      exampleMeaning: ""
+    }
+  ]);
+  const [edit, setEdit] = useState('')
   const switchHandler = (mode) => {
     setMode(mode)
   }
   const selectedStyle = { backgroundColor: '#ccc', borderColor: "#fff" }
   return (
     <View style={defaultStyle.container}>
-      {
-        (modalVisible) &&
-        <View style={defaultStyle.modalBack}>
-          <TouchableOpacity style={{width: '100%', height: '100%'}} onPress={()=>setModalVisible(!modalVisible)}/>
-        </View>
-      }
       <View style={[defaultStyle.row, defaultStyle.around, defaultStyle.switchMode]}>
         <TouchableOpacity style={[defaultStyle.switchBtn, (mode=='add')? selectedStyle: ""]} 
           onPress={()=>switchHandler('add')}>
@@ -36,12 +39,15 @@ export default function AddWords() {
         (mode === 'add')?
           <Add 
             list={list} 
-            setList={setList}/> :
-          <AddeddList 
+            setList={setList}
+            edit={edit}
+            /> :
+            <AddeddList 
             list={list} 
             setList={setList}
-            modalVisible={modalVisible} 
-            setModalVisible={setModalVisible}/>
+            setMode={setMode}
+            setEdit={setEdit}
+          />
       }
     </View>
   );
@@ -98,7 +104,7 @@ const Add = (props) => {
         exampleMeaning: edit.exampleMeaning
       })
     }
-  }, [])
+  }, [edit])
   return (
     <ScrollView style={{position: 'relative'}}>
       <View style={{margin: 10}}>
@@ -166,27 +172,45 @@ const Add = (props) => {
 }
 
 const AddeddList = (props) => {
-  const {list, setList, modalVisible, setModalVisible} = props;
-  const moreFunHandler = (item) => {
-    setModalVisible(true)
+  const {list, setList, setMode, setEdit} = props;
+  const [deleteId, setDeleteId] = useState('');
+  const deleteHandler = () => {
+    if(!deleteId) return;
+    let newList = list
+    for(let i in newList){
+      if((newList[i].id== deleteId)){
+        newList.splice(+i,1);
+        break;
+      };
+    }
+    setList([...newList])
+    setDeleteId('')
+  }
+  const editHandler = (item) => {
+    setEdit(item)
+    setMode('add')
   }
   return (
       <View style={addedList.itemGroup}>
         {
+          deleteId && 
+          <View style={defaultStyle.modalBack}>
+            <View style={defaultStyle.modalView}>
+              <Text style={[defaultStyle.tCenter, {fontSize: 20, marginBottom: 3}]}>O'chirilsinmi ?</Text>
+              <View style={defaultStyle.row}>
+                <TouchableOpacity style={[defaultStyle.btn, {backgroundColor: '#00f'}]} onPress={() => setDeleteId('')}>
+                  <Text style={{color: '#fff'}}>Bekor qilish</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={[defaultStyle.btn, {backgroundColor: '#f00'}]} onPress={deleteHandler} >
+                  <Text style={{color: '#fff'}}>O'chirish</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        }
+        {
           (list.length>0) ? 
           <View>
-            { modalVisible &&
-              <Modal
-                animationType="slide"
-                transparent={true}
-                visible={modalVisible}
-                style={addedList.moreFun}
-                onRequestClose={() => {
-                  Alert.alert('Modal has been closed.');
-                }}>
-              <MoreFun setModalVisible={setModalVisible}/>
-            </Modal>
-            }
             <FlatList
               data={list}
               renderItem={({item}) => (
@@ -198,9 +222,16 @@ const AddeddList = (props) => {
                     <Text style={addedList.example}>Namuna: {item.example}</Text>
                     <Text style={addedList.exampleMeang}>Namuna tarjimasi: {item.exampleMeaning}</Text>
                   </View>
-                  <TouchableOpacity style={addedList.moreBtn} onPress={()=>moreFunHandler(item)}>
-                    <Feather name="more-horizontal" size={25} color={"#000"} />
+                  <View style={defaultStyle.column}>
+                  <TouchableOpacity style={[addedList.moreListBtn, defaultStyle.row]}
+                    onPress={()=>editHandler(item.id)}>
+                    <Feather name="edit" size={25} color={"#000"} />
                   </TouchableOpacity>
+                  <TouchableOpacity style={[addedList.moreListBtn, defaultStyle.row]}
+                    onPress={()=>setDeleteId(item.id)}>
+                    <Feather name="trash" size={25} color={"#f00"} />
+                  </TouchableOpacity>
+                  </View>
                 </View>
               )}
               keyExtractor={item => item.id}
@@ -210,29 +241,5 @@ const AddeddList = (props) => {
           <Text style={addedList.defaultMsg}>Ro'yxat bo'sh</Text>
         }
       </View>
-  )
-}
-
-const MoreFun = (item) => {
-  return (
-    <View>
-      <Text style={[defaultStyle.tCenter, {fontSize: 20}]}>Qo'shimcha: "{item.name}"</Text>
-      <TouchableOpacity style={[addedList.moreListBtn, defaultStyle.row]}>
-        <Feather name="volume-2" size={25} color={"#000"} />
-        <Text style={{fontSize: 18, marginStart: 10}}>Tinglash</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={[addedList.moreListBtn, defaultStyle.row]}>
-        <Feather name="copy" size={25} color={"#000"} />
-        <Text style={{fontSize: 18, marginStart: 10}}>Nusxalash</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={[addedList.moreListBtn, defaultStyle.row]}>
-        <Feather name="edit" size={25} color={"#000"} />
-        <Text style={{fontSize: 18, marginStart: 10}}>O'zgartirish</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={[addedList.moreListBtn, defaultStyle.row]}>
-        <Feather name="trash" size={25} color={"#000"} />
-        <Text style={{fontSize: 18, marginStart: 10}}>O'chirish</Text>
-      </TouchableOpacity>
-    </View>
   )
 }
