@@ -1,7 +1,8 @@
 const monoose = require('mongoose');
+const config = require('config')
 
 module.exports = function(){
-    monoose.connect('mongodb://localhost/word-memorization')
+    monoose.connect(config.get('dbConnectURL'))
         .then(()=>{
             console.log('db connection sucsess');
         })

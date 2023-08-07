@@ -1,0 +1,4 @@
+{
+    "jwtAuthToken":"parol12345",
+    "dbConnectURL": "mongodb://localhost/word-memorization"
+}

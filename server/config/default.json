@@ -1,0 +1,4 @@
+{
+    "jwtAuthToken":"parol12345",
+    "dbConnectURL": "mongodb://127.0.0.1/todo"
+}

@@ -1,0 +1,4 @@
+{
+    "jwtAuthToken":"wordMemorizationPassword",
+    "dbConnectURL": "mongoUrl"
+}

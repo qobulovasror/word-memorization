@@ -1,8 +1,6 @@
-const router = require('express').Router();
+const router = require('express').Router(); 
+const authContrller = require('../controller/authController');
 
-router.post('/', async(req, res)=>{
-    res.send('this is auth');
-})
-
+router.post('/', authContrller.postUser);
 
 module.exports = router;
