@@ -8,16 +8,7 @@ import { Feather, Ionicons } from "@expo/vector-icons";
 
 export default function AddWords() {
   const [mode, setMode] = useState('add');
-  const [list, setList] = useState([
-    {
-      id: Date.now(),
-      name: 'word',
-      transcription: "",
-      translation:"so'z",
-      example: "",
-      exampleMeaning: ""
-    }
-  ]);
+  const [list, setList] = useState([]);
   const [edit, setEdit] = useState('')
   const switchHandler = (mode) => {
     setMode(mode)
@@ -64,9 +55,31 @@ const Add = (props) => {
     example: "",
     exampleMeaning: ""
   })
-  const addWordHandler = () => {
+  const addWordHandler = async () => {
     if(word && word.name && word.translation){
-      setList([...list, {...word, id: Date.now()}])
+      if(!edit){
+        // try {
+        //   await fetch('http://localhost:5000/api/words/')
+        //   .then(res=>{
+        //     console.log(res);
+        //   })
+        //   .catch(err=>{
+        //     console.log(err);
+        //   })
+        // } catch (error) {
+        //   console.log(error);
+        //   alert(error)
+        // }
+        setList([...list, {...word, id: Date.now()}])
+        
+      }else{
+        let newList= list.map((item)=>{
+          return item.id === edit.id?  Object.assign({}, prevState): item
+        })
+       
+
+
+      }
       setWord({
         name: "",
         transcription: "",
@@ -97,12 +110,14 @@ const Add = (props) => {
   useEffect(()=>{
     if(edit){
       setWord({
-        name: edit.name | '',
+        id: edit.id,
+        name: edit.name,
         transcription: edit.transcription,
         translation: edit.translation,
         example: edit.example,
         exampleMeaning: edit.exampleMeaning
       })
+      setExampleCount(1)
     }
   }, [edit])
   return (
@@ -224,7 +239,7 @@ const AddeddList = (props) => {
                   </View>
                   <View style={defaultStyle.column}>
                   <TouchableOpacity style={[addedList.moreListBtn, defaultStyle.row]}
-                    onPress={()=>editHandler(item.id)}>
+                    onPress={()=>editHandler(item)}>
                     <Feather name="edit" size={25} color={"#000"} />
                   </TouchableOpacity>
                   <TouchableOpacity style={[addedList.moreListBtn, defaultStyle.row]}

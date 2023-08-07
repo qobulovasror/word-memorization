@@ -1,13 +1,17 @@
 import React from "react";
 import { TouchableOpacity, Text, View, ScrollView } from "react-native";
-import { AntDesign, Feather, FontAwesome, Ionicons, MaterialCommunityIcons, Octicons } from "@expo/vector-icons";
+import { AntDesign, Feather, FontAwesome, Ionicons, MaterialCommunityIcons, MaterialIcons, Octicons } from "@expo/vector-icons";
 import { mainStyle } from "../assets/styles/main";
 import {defaultStyle} from '../assets/styles/defaultStyle'
 
 export default function MainScreen({ navigation }) {
+  const updateInfo = () => {
+    alert('Bu funksiyalar yaqin orada qo\'shiladi')
+  }
   return (
     <View style={defaultStyle.container}>
       <ScrollView style={defaultStyle.column}>
+        {/* Kunlik so'z o'rganish */}
         <View style={[defaultStyle.column, {marginBottom: 2}]}>
           <Text style={{fontSize: 15}}>Kunlik so'z o'rganish</Text>
           <View style={[defaultStyle.column, mainStyle.itemGroup]}>
@@ -39,39 +43,53 @@ export default function MainScreen({ navigation }) {
             </TouchableOpacity>
           </View>
         </View>
+        {/* Qo'shimcha (maxsus) o'rganish */}
         <View style={[defaultStyle.column, {marginBottom: 2}]}>
           <Text style={{fontSize: 15}}>Qo'shimcha (maxsus) o'rganish</Text>
           <View style={[defaultStyle.column, mainStyle.itemGroup]}>
-            <TouchableOpacity style={[defaultStyle.row, mainStyle.item]}>
+            <TouchableOpacity style={[defaultStyle.row, mainStyle.item]} onPress={updateInfo}>
               <Ionicons name="pencil-outline" size={25} color={"#0f0"} />
               <Text style={{marginStart: 10, fontSize: 20}}>Toifa tanlash</Text>
             </TouchableOpacity>
             <View style={mainStyle.hr}></View>
-            <TouchableOpacity style={[defaultStyle.row, mainStyle.item]}>
+            <TouchableOpacity style={[defaultStyle.row, mainStyle.item]} onPress={updateInfo}>
               <AntDesign name="pluscircleo" size={25} color={"#0f0"} />
               <Text style={{marginStart: 10, fontSize: 20}}>Toifa bo'yicha so'z o'rganish</Text>
             </TouchableOpacity>
             <View style={mainStyle.hr}></View>
-            <TouchableOpacity style={[defaultStyle.row, mainStyle.item]}>
+            <TouchableOpacity style={[defaultStyle.row, mainStyle.item]} onPress={updateInfo}>
               <Feather name="refresh-ccw" size={25} color={"#00f"} />
               <Text style={{marginStart: 10, fontSize: 20}}>So'zlarni takrorlash</Text>
             </TouchableOpacity>
           </View>
         </View>
+        {/* Qo'shimcha imkoniyatlar */}
         <View style={[defaultStyle.column, {marginBottom: 2}]}>
           <Text style={{fontSize: 15}}>Qo'shimcha imkoniyatlar</Text>
           <View style={[defaultStyle.column, mainStyle.itemGroup]}>
+            <TouchableOpacity style={[defaultStyle.row, mainStyle.item]}>
+              <MaterialCommunityIcons name="translate" size={25} color={"#9457EB"} />
+              <Text style={{marginStart: 10, fontSize: 20}}>Tarjima qilish</Text>
+            </TouchableOpacity>
+            <View style={mainStyle.hr}></View>
             <TouchableOpacity style={[defaultStyle.row, mainStyle.item]}>
               <Ionicons name="list" size={25} color={"#B91786"} />
               <Text style={{marginStart: 10, fontSize: 20}}>Noto'g'ri fe'llar</Text>
             </TouchableOpacity>
             <View style={mainStyle.hr}></View>
             <TouchableOpacity style={[defaultStyle.row, mainStyle.item]}>
-              <MaterialCommunityIcons name="translate" size={25} color={"#9457EB"} />
-              <Text style={{marginStart: 10, fontSize: 20}}>Tarjima qilish</Text>
+              <MaterialCommunityIcons name="alphabetical" size={25} color={"#121786"} />
+              <Text style={{marginStart: 10, fontSize: 20}}>Alifbo</Text>
+            </TouchableOpacity>
+            <View style={mainStyle.hr}></View>
+            <TouchableOpacity style={[defaultStyle.row, mainStyle.item]}
+              onPress={()=>navigation.navigate("Raqamlar")}>
+              <MaterialCommunityIcons name="numeric" size={25} color={"#00ff00"} />
+              <Text style={{marginStart: 10, fontSize: 20}}>Raqamlar</Text>
             </TouchableOpacity>
           </View>
         </View>
+        {/* Statistika */}
         <View style={[defaultStyle.column, {marginBottom: 2}]}>
           <Text style={{fontSize: 15}}>Statistika</Text>
           <View style={[defaultStyle.column, mainStyle.itemGroup]}>
@@ -107,6 +125,7 @@ export default function MainScreen({ navigation }) {
             </View>
           </View>
         </View>
+        {/* Dastur haqida */}
         <View style={[defaultStyle.column, {marginBottom: 2}]}>
           <Text style={{fontSize: 15}}>Dastur haqida</Text>
           <View style={[defaultStyle.column, mainStyle.itemGroup]}>
