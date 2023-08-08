@@ -1,47 +1,82 @@
-const { View, TextInput, ScrollView } = require("react-native");
+import { useState } from 'react';
+import { View, TextInput, ScrollView, FlatList, Text } from "react-native";
+import * as Speech from 'expo-speech';
 
+import {numList} from '../../assets/data/numers'
 import { nums } from "../../assets/styles/nums";
 import { defaultStyle } from "../../assets/styles/defaultStyle";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { Ionicons } from "@expo/vector-icons";
-
+import { AntDesign, Feather, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Nums = () => {
+  const [viewNum, setViewNum] = useState('')
+  const [input, setInput] = useState('')
+  const viewNumHandler = () => {
+    if(isNaN(input)) return;
+    let number = numberToEnglish(input);
+    setInput('')
+    setViewNum(number)
+  }
+  const cancelView = () => {
+    setViewNum('')
+  }
+  const enterNumber = (num) => {
+    if(!isNaN(num))
+      setInput(num)
+  }
+  const showNum = (num, ordinal) =>{
+    alert('nomi: '+num+'\ntartibi:'+ordinal)
+  }
+  const speak = (name) => {
+    Speech.speak(name);
+  };
     return(
         <View style={defaultStyle.container}>
+          <View style={[nums.numView, {top: (viewNum!='')? '0%': '-50%'}]}>
+            <View style={defaultStyle.column}>
+              <TouchableOpacity 
+                style={[nums.cancelBtn, {backgroundColor: '#f00'}]}
+                onPress={cancelView}>
+                <Feather name='x' size={20} color={'#fff'}/>
+              </TouchableOpacity>
+              <Text style={[defaultStyle.tCenter, {fontSize: 20, marginTop: 10}]}>{viewNum}</Text>
+              <TouchableOpacity style={[nums.cancelBtn, {backgroundColor: '#0f0'}]} onPress={()=>speak(viewNum)}>
+                <AntDesign name="sound" size={20} color={'#fff'}/>
+              </TouchableOpacity>
+            </View>
+          </View>
             <View style={[defaultStyle.row, defaultStyle.between]}>
-                <TextInput style={nums.input}/>
-                <TouchableOpacity style={nums.btn}>
-                    <Ionicons name="search" size={30} color={'#fff'}/>
+                <TextInput 
+                  style={nums.input} 
+                  value={input} 
+                  onChangeText={(num)=>enterNumber(num)}
+                  placeholder='123'
+                  keyboardType='number-pad'
+                />
+                <TouchableOpacity style={nums.btn} onPress={viewNumHandler}>
+                    <MaterialCommunityIcons name="eye-check" size={30} color={'#fff'}/>
                 </TouchableOpacity>
             </View>
-            <ScrollView>
-                {/* <FlatList
-                data={list}
+            <View style={nums.list}>
+                <FlatList
+                data={numList}
                 renderItem={({item}) => (
-                    <View style={[nums.item, defaultStyle.row, defaultStyle.between]}>
-                    <View>
-                        <Text style={addedList.itemName}>So'z: {item.name}</Text>
-                        <Text style={addedList.itemTranslation}>Tarjimasi: {item.translation}</Text>
-                        <Text style={addedList.itemTranscription}>Transkripsiyasi: {item.transcription}</Text>
-                        <Text style={addedList.example}>Namuna: {item.example}</Text>
-                        <Text style={addedList.exampleMeang}>Namuna tarjimasi: {item.exampleMeaning}</Text>
-                    </View>
-                    <View style={defaultStyle.column}>
-                    <TouchableOpacity style={[addedList.moreListBtn, defaultStyle.row]}
-                        onPress={()=>editHandler(item)}>
-                        <Feather name="edit" size={25} color={"#000"} />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={[addedList.moreListBtn, defaultStyle.row]}
-                        onPress={()=>setDeleteId(item.id)}>
-                        <Feather name="trash" size={25} color={"#f00"} />
-                    </TouchableOpacity>
-                    </View>
+                    <View style={[nums.item, defaultStyle.row, defaultStyle.between]} key={item.id}>
+                      <Text style={{fontSize: 17}}>{item.num}</Text>
+                      <Text style={{fontSize: 18}}>{item.name}</Text>  
+                      <View style={[defaultStyle.row, defaultStyle.between]}>
+                        <TouchableOpacity style={nums.listBtn} onPress={()=>showNum(item.name, item.ordinal)}>
+                          <Ionicons name="eye" size={20} color={'#000'}/>
+                        </TouchableOpacity >
+                        <TouchableOpacity style={nums.listBtn} onPress={()=>speak(item.name)}>
+                          <AntDesign name="sound" size={20} color={'#000'}/>
+                        </TouchableOpacity>
+                      </View>
                     </View>
                 )}
                 keyExtractor={item => item.id}
-                />  */}
-            </ScrollView>
+                /> 
+            </View>
         </View>
     )
 }
@@ -88,12 +123,11 @@ function numberToEnglish(number) {
       chunkIndex++;
     }
   
-    // return result.trim();
-    alert(result.trim())
+    return result.trim();
+    // alert(result.trim())
   }
   
 //   // Test the function
 //   const num = 123456789;
 //   const englishNumber = numberToEnglish(num);
 //   console.log(englishNumber);
-  

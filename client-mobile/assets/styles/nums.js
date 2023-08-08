@@ -27,5 +27,34 @@ export const nums = StyleSheet.create({
         marginEnd: 20,
         marginVertical: 10,
       },
-      
+      list: {
+        marginStart: 10,
+        width: '100%'
+      },
+      listBtn: {
+        marginEnd: 15,
+        padding: 5
+      },
+      numView: {
+        width: '95%',
+        // height: 120,
+        position: 'absolute',
+        zIndex: 100,
+        // top: '0%',
+        padding: 5,
+        marginHorizontal: 10,
+        borderColor: '#000',
+        borderWidth: 1,
+        borderRadius: 10,
+        backgroundColor: '#fff',
+      },
+      cancelBtn: {
+        left: '90%', 
+        padding: 5, 
+        borderWidth: 0.4, 
+        borderColor: '#000', 
+        borderRadius: 10, 
+        width: 30, 
+        backgroundColor: '#f00'
+      }
   });
