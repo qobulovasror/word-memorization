@@ -61,7 +61,7 @@ const Nums = () => {
                 <FlatList
                 data={numList}
                 renderItem={({item}) => (
-                    <View style={[nums.item, defaultStyle.row, defaultStyle.between]} key={item.id}>
+                    <View style={[nums.item, defaultStyle.row, defaultStyle.between]} key={item.name}>
                       <Text style={{fontSize: 17}}>{item.num}</Text>
                       <Text style={{fontSize: 18}}>{item.name}</Text>  
                       <View style={[defaultStyle.row, defaultStyle.between]}>
@@ -74,7 +74,7 @@ const Nums = () => {
                       </View>
                     </View>
                 )}
-                keyExtractor={item => item.id}
+                keyExtractor={item => item.name}
                 /> 
             </View>
         </View>

@@ -73,12 +73,14 @@ export default function MainScreen({ navigation }) {
               <Text style={{marginStart: 10, fontSize: 20}}>Tarjima qilish</Text>
             </TouchableOpacity>
             <View style={mainStyle.hr}></View>
-            <TouchableOpacity style={[defaultStyle.row, mainStyle.item]}>
+            <TouchableOpacity style={[defaultStyle.row, mainStyle.item]}
+              onPress={()=>navigation.navigate("Noto'g'ri fe'llar")}>
               <Ionicons name="list" size={25} color={"#B91786"} />
               <Text style={{marginStart: 10, fontSize: 20}}>Noto'g'ri fe'llar</Text>
             </TouchableOpacity>
             <View style={mainStyle.hr}></View>
-            <TouchableOpacity style={[defaultStyle.row, mainStyle.item]}>
+            <TouchableOpacity style={[defaultStyle.row, mainStyle.item]}
+              onPress={()=>navigation.navigate("Alifbo")}>
               <MaterialCommunityIcons name="alphabetical" size={25} color={"#121786"} />
               <Text style={{marginStart: 10, fontSize: 20}}>Alifbo</Text>
             </TouchableOpacity>
