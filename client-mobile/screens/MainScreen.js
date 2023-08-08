@@ -67,7 +67,8 @@ export default function MainScreen({ navigation }) {
         <View style={[defaultStyle.column, {marginBottom: 2}]}>
           <Text style={{fontSize: 15}}>Qo'shimcha imkoniyatlar</Text>
           <View style={[defaultStyle.column, mainStyle.itemGroup]}>
-            <TouchableOpacity style={[defaultStyle.row, mainStyle.item]}>
+            <TouchableOpacity style={[defaultStyle.row, mainStyle.item]}
+            onPress={()=>navigation.navigate("Translate")}>
               <MaterialCommunityIcons name="translate" size={25} color={"#9457EB"} />
               <Text style={{marginStart: 10, fontSize: 20}}>Tarjima qilish</Text>
             </TouchableOpacity>
