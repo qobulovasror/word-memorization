@@ -8,6 +8,7 @@ import TodaysWordStudy from "../screens/daily/TodaysWordStudy";
 import Nums from "../screens/additional/Nums";
 import Translate from "../screens/additional/Translate";
 import Abc from "../screens/additional/Abc";
+import IrregularVerbs from "../screens/additional/IrregularVerbs";
 
 const Drawer = createDrawerNavigator();
 
@@ -18,7 +19,7 @@ export default function DrawerNavigator() {
       <Drawer.Screen name="So'z qo'shish" component={AddWords} />
       <Drawer.Screen name="Bugungi so'zlarni o'rganish" component={TodaysWordStudy} />
       <Drawer.Screen name="Translate" component={Translate} />
-      <Drawer.Screen name="Noto'g'ri fe'llar" component={Translate} />
+      <Drawer.Screen name="Noto'g'ri fe'llar" component={IrregularVerbs} />
       <Drawer.Screen name="Alifbo" component={Abc} />
       <Drawer.Screen name="Raqamlar" component={Nums} />
       <Drawer.Screen name="Secundry" component={SecundaryScreen} />
