@@ -24,12 +24,18 @@ const WordSchema = new mongoose.Schema({
     status: {
         type: String,
         default: 'new',
-        enum: ['new', 'takror', 'yodlangan']
+        enum: ['new', 'repeat', 'memorized']
     },
     userId: {
         type: mongoose.Types.ObjectId,
         requried: true
-    }
+    },
+    createdAt:{
+        type: Date,
+        default: Date.now()
+    },
+    exampleText: { type: String},
+    exampleMeaning: { type: String}
 });
 
 const Word = mongoose.model('word', WordSchema);
@@ -39,7 +45,7 @@ const wordValidate = (data) => {
         name: Joi.string().required().max(150).min(1),
         transcription: Joi.string().min(1).max(50),
         translation: Joi.string().required().min(1).max(150),
-        status: Joi.string().default("new")
+        status: Joi.string().default("new").valid('new', 'repeat', 'memorized')
     })
 
     return wordValidateSchema.validate(data);
