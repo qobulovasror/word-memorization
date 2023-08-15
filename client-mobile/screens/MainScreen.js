@@ -132,17 +132,20 @@ export default function MainScreen({ navigation }) {
         <View style={[defaultStyle.column, {marginBottom: 2}]}>
           <Text style={{fontSize: 15}}>Dastur haqida</Text>
           <View style={[defaultStyle.column, mainStyle.itemGroup]}>
-            <TouchableOpacity style={[defaultStyle.row, mainStyle.item]}>
+            <TouchableOpacity style={[defaultStyle.row, mainStyle.item]}
+              onPress={()=>navigation.navigate("Fikr-mulohazalar")}>
               <Octicons name="feed-discussion" size={25} color={"#50C878"} />
               <Text style={{marginStart: 10, fontSize: 20}}>Fikr-mulohazalar</Text>
             </TouchableOpacity>
             <View style={mainStyle.hr}></View>
-            <TouchableOpacity style={[defaultStyle.row, mainStyle.item]}>
+            <TouchableOpacity style={[defaultStyle.row, mainStyle.item]}
+              onPress={()=>navigation.navigate("Dastur haqida ma'lumot")}>
               <AntDesign name="infocirlceo" size={25} color={"#B91786"} />
               <Text style={{marginStart: 10, fontSize: 20}}>Dastur haqida ma'lumot</Text>
             </TouchableOpacity>
             <View style={mainStyle.hr}></View>
-            <TouchableOpacity style={[defaultStyle.row, mainStyle.item]}>
+            <TouchableOpacity style={[defaultStyle.row, mainStyle.item]}
+              onPress={()=>navigation.navigate("Bog'lanish")}>
               <AntDesign name="contacts" size={25} color={"#9457EB"} />
               <Text style={{marginStart: 10, fontSize: 20}}>Bog'lanish</Text>
             </TouchableOpacity>
