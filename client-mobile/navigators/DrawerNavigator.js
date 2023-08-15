@@ -11,7 +11,6 @@ import IrregularVerbs from "../screens/additional/IrregularVerbs";
 
 import Feedback from "../screens/info/Feedback";
 import Information from "../screens/info/Information";
-import Contact from "../screens/info/Contact";
 
 const Drawer = createDrawerNavigator();
 
@@ -27,7 +26,6 @@ export default function DrawerNavigator() {
       <Drawer.Screen name="Raqamlar" component={Nums} />
       <Drawer.Screen name="Fikr-mulohazalar" component={Feedback} />
       <Drawer.Screen name="Dastur haqida ma'lumot" component={Information} />
-      <Drawer.Screen name="Bog'lanish" component={Contact} />
     </Drawer.Navigator>
   );
 }

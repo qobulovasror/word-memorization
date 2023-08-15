@@ -122,7 +122,7 @@ export default function MainScreen({ navigation }) {
                 </View>
                 <Text style={{margin: 5, fontSize: 15}}>Bir oyda 0/300 ta yangi so'z</Text>
               </View>
-              <TouchableOpacity style={{width: 50, height: 50, padding: 9, backgroundColor: '#0f0', borderRadius: 10}}>
+              <TouchableOpacity onPress={updateInfo} style={{width: 50, height: 50, padding: 9, backgroundColor: '#0f0', borderRadius: 10}}>
                 <Ionicons name="pencil" size={30} color={'#000'}/>
               </TouchableOpacity>
             </View>
@@ -141,14 +141,14 @@ export default function MainScreen({ navigation }) {
             <TouchableOpacity style={[defaultStyle.row, mainStyle.item]}
               onPress={()=>navigation.navigate("Dastur haqida ma'lumot")}>
               <AntDesign name="infocirlceo" size={25} color={"#B91786"} />
-              <Text style={{marginStart: 10, fontSize: 20}}>Dastur haqida ma'lumot</Text>
+              <Text style={{marginStart: 10, fontSize: 20}}>Dastur haqida va bog'lanish</Text>
             </TouchableOpacity>
-            <View style={mainStyle.hr}></View>
-            <TouchableOpacity style={[defaultStyle.row, mainStyle.item]}
+            {/* <View style={mainStyle.hr}></View> */}
+            {/* <TouchableOpacity style={[defaultStyle.row, mainStyle.item]}
               onPress={()=>navigation.navigate("Bog'lanish")}>
               <AntDesign name="contacts" size={25} color={"#9457EB"} />
               <Text style={{marginStart: 10, fontSize: 20}}>Bog'lanish</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         </View>
       </ScrollView>

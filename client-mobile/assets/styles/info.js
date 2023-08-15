@@ -39,3 +39,35 @@ export const feetback = StyleSheet.create({
     margin: 10,
   }
 });
+
+export const info = StyleSheet.create({
+  main: {
+    marginHorizontal: 10,
+    padding: 15,
+    borderRadius: 10,
+    position: 'relative',
+    top: '-10%',
+    backgroundColor: "#fff",
+  },
+  btnGroup: {
+    borderRadius: 10,
+    padding: 5,
+    marginVertical: 10,
+    borderWidth: 0.2,
+    borderColor: "#000",
+  },
+  contactBtn: {
+    marginHorizontal: 5,
+    padding: 10,
+    borderRadius: 10,
+  },
+  textHeader: {
+    fontWeight: '700',
+    fontSize: 18
+  },
+  text: {
+    fontSize: 17,
+    marginBottom:  5,
+    textAlign: 'justify'
+  }
+});
