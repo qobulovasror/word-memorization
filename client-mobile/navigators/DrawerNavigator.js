@@ -9,6 +9,7 @@ import Translate from "../screens/additional/Translate";
 import Abc from "../screens/additional/Abc";
 import IrregularVerbs from "../screens/additional/IrregularVerbs";
 
+import Setting from "../screens/info/setting";
 import Feedback from "../screens/info/Feedback";
 import Information from "../screens/info/Information";
 
@@ -24,6 +25,7 @@ export default function DrawerNavigator() {
       <Drawer.Screen name="Noto'g'ri fe'llar" component={IrregularVerbs} />
       <Drawer.Screen name="Alifbo" component={Abc} />
       <Drawer.Screen name="Raqamlar" component={Nums} />
+      <Drawer.Screen name="Sozlanmalar" component={Setting} />
       <Drawer.Screen name="Fikr-mulohazalar" component={Feedback} />
       <Drawer.Screen name="Dastur haqida ma'lumot" component={Information} />
     </Drawer.Navigator>

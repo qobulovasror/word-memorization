@@ -1,12 +1,7 @@
-const express = require('express');
-const app = express();
-const dotenv = require('dotenv').config({ path: './config/config.env' });
+const app = require('express')();
 
 require('./startup/db')();
 require('./startup/routers')(app);
-
-
-
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, ()=>{

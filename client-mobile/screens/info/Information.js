@@ -43,10 +43,10 @@ const Information = () => {
                 <FontAwesome name="telegram" size={30} color={"#2297F0FF"}/>
             </TouchableOpacity>
             <TouchableOpacity style={info.contactBtn} onPress={() => Linking.openURL('mailto:qobulovasror0@gmail.com')}>
-                <MaterialCommunityIcons name="email" size={30} color={"#2297F0FF"}/>
+                <MaterialCommunityIcons name="email" size={30} color={"#b00"}/>
             </TouchableOpacity>
             <TouchableOpacity style={info.contactBtn} onPress={() => Linking.openURL('https://github.com/qobulovasror')}>
-                <MaterialCommunityIcons name="github" size={30} color={"#2297F0FF"}/>
+                <MaterialCommunityIcons name="github" size={30} color={"#000"}/>
             </TouchableOpacity>
         </View>
       </View>

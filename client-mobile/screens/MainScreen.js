@@ -133,6 +133,12 @@ export default function MainScreen({ navigation }) {
           <Text style={{fontSize: 15}}>Dastur haqida</Text>
           <View style={[defaultStyle.column, mainStyle.itemGroup]}>
             <TouchableOpacity style={[defaultStyle.row, mainStyle.item]}
+              onPress={()=>navigation.navigate('Sozlanmalar')}>
+              <AntDesign name="setting" size={25} color={"#00f"} />
+              <Text style={{marginStart: 10, fontSize: 20}}>Sozlanmalar</Text>
+            </TouchableOpacity>
+            <View style={mainStyle.hr}></View>
+            <TouchableOpacity style={[defaultStyle.row, mainStyle.item]}
               onPress={()=>navigation.navigate("Fikr-mulohazalar")}>
               <Octicons name="feed-discussion" size={25} color={"#50C878"} />
               <Text style={{marginStart: 10, fontSize: 20}}>Fikr-mulohazalar</Text>

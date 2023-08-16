@@ -14,5 +14,4 @@ const user = function(req,res,next){
     next();
 }
 
-module.exports.admin = admin;
-module.exports.user = user;
+module.exports = {admin, user}
