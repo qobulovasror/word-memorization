@@ -1,33 +1,24 @@
-import db from "./dbService";
+import { db } from "./dbService";
 
 const createTokenTable = () => {
   db.transaction((tx) => {
     tx.executeSql(
-      "CREATE TABLE IF NOT EXISTS tokens (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, value TEXT NOT NULL)",
-      [],
-      () => {
-        console.log("Token table created successfully");
-      },
-      (error) => {
-        console.log("Error creating token table:", error);
-      }
+      "CREATE TABLE IF NOT EXISTS tokens (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, value TEXT NOT NULL)"
     );
   });
 };
 
-const storeToken = (name, value) => {
-  db.transaction((tx) => {
-    tx.executeSql(
-      "INSERT INTO tokens (name, value) VALUES (?, ?)",
-      [name, value],
-      () => {
-        console.log("Token stored successfully");
-      },
-      (error) => {
-        console.log("Error storing token:", error);
-      }
-    );
-  });
+const setTokenToDB = (name, value) => {
+  try {
+    db.transaction((tx) => {
+      tx.executeSql("INSERT INTO tokens (name, value) VALUES (?, ?)", [
+        name,
+        value,
+      ]);
+    });
+  } catch (error) {
+    alert(error);
+  }
 };
 
 const getToken = (name) => {
@@ -51,4 +42,10 @@ const getToken = (name) => {
   });
 };
 
-export { createTokenTable, storeToken, getToken };
+const deleteToken = (name) => {
+  db.transaction((tx) => {
+    tx.executeSql("DELETE FROM tokens WHERE name=?", [name]);
+  });
+};
+
+export { createTokenTable, setTokenToDB, getToken, deleteToken };

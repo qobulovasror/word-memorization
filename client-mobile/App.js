@@ -1,55 +1,31 @@
 import { NavigationContainer } from "@react-navigation/native";
 import DrawerNavigator from "./navigators/DrawerNavigator";
 import { useEffect, useState } from "react";
+import { View } from "react-native";
 
-import {
-  createTokenTable,
-  getToken,
-  storeToken,
-} from "./services/tokenService";
+import Auth from "./screens/auth/Auth";
+import { getToken } from "./services/tokenService";
+// import { TokenContextProvider, useTokenContext } from "./services/context";
+// import { TokenContextProvider, useTokenContext } from "./services/context";
 
 export default function App() {
-  const [initialized, setInitialized] = useState(false);
-  const getTokenFromBackend = async () =>{
-    try {
-      const res = await fetch('url');
-      res.json().then(data=>{
-        console.log(data);
-        return data;
-      })
-    } catch (error) {
-      console.log(error);
-      alert(error)
+  const [token, setToken] = useState('');
+  useEffect(()=>{
+    if (!token) {
+      getToken("wordMemorizationAuthToken")
+        .then((data) => {
+          setToken(data);
+        })
+        .catch((err) => {
+          alert(err);
+        });
     }
-  }
-  useEffect( async () => {
-    if (!initialized) {
-      createTokenTable();
-      setInitialized(true);
-    }
-
-    let token = await getTokenFromBackend()
-    // Store a token
-    storeToken("wordMemorizationAuthToken", token);
-
-    // Retrieve a token
-    getToken("wordMemorizationAuthToken")
-      .then((token) => {
-        if (token) {
-          console.log("Token retrieved:", token);
-        } else {
-          console.log("Token not found");
-        }
-      })
-      .catch((error) => {
-        console.log("Error retrieving token:", error);
-      });
-
-    // Other code here
-  }, [initialized]);
-  return (
+  }, [])
+  return token ? (
     <NavigationContainer>
-      <DrawerNavigator />
+      <DrawerNavigator  token={token} setToken={setToken} />
     </NavigationContainer>
+  ) : (
+    <Auth token={token} setToken={setToken} />
   );
 }

@@ -106,5 +106,21 @@ export const setting = StyleSheet.create({
     width: '100%',
     height: 0.5,
     backgroundColor: '#000'
+  },
+  logoutModal: {
+    position: 'absolute', 
+    top: "30%",
+    backgroundColor: '#fff',
+    zIndex: 12,
+    padding: 10,
+    marginHorizontal: 30,
+    borderRadius: 10,
+    borderWidth: 0.3,
+  },
+  modalBtn: {
+    padding: 10,
+    borderRadius: 10,
+    marginHorizontal: 5,
+    marginVertical: 10
   }
 })

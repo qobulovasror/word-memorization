@@ -15,7 +15,7 @@ import Information from "../screens/info/Information";
 
 const Drawer = createDrawerNavigator();
 
-export default function DrawerNavigator() {
+export default function DrawerNavigator({token, setToken}) {
   return (
     <Drawer.Navigator>
       <Drawer.Screen name="Asosiy oyna" component={MainScreen} />
@@ -25,7 +25,10 @@ export default function DrawerNavigator() {
       <Drawer.Screen name="Noto'g'ri fe'llar" component={IrregularVerbs} />
       <Drawer.Screen name="Alifbo" component={Abc} />
       <Drawer.Screen name="Raqamlar" component={Nums} />
-      <Drawer.Screen name="Sozlanmalar" component={Setting} />
+      <Drawer.Screen name="Sozlanmalar">
+        {props => <Setting {...props} token={token} setToken={setToken} />}
+      </Drawer.Screen>
+      {/* <Drawer.Screen name="Sozlanmalar" component={<Setting token={token} setToken={setToken}/>} /> */}
       <Drawer.Screen name="Fikr-mulohazalar" component={Feedback} />
       <Drawer.Screen name="Dastur haqida ma'lumot" component={Information} />
     </Drawer.Navigator>
