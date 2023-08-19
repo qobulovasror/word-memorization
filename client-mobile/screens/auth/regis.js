@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   TextInput,
+  ActivityIndicator
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 

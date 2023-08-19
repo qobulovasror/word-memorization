@@ -1,6 +1,6 @@
 import React from "react";
 import { TouchableOpacity, Text, View, ScrollView } from "react-native";
-import { AntDesign, Feather, FontAwesome, Ionicons, MaterialCommunityIcons, MaterialIcons, Octicons } from "@expo/vector-icons";
+import { AntDesign, Feather, FontAwesome, Ionicons, MaterialCommunityIcons, Octicons } from "@expo/vector-icons";
 import { mainStyle } from "../assets/styles/main";
 import {defaultStyle} from '../assets/styles/defaultStyle'
 

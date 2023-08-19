@@ -1,5 +1,4 @@
-import { Switch, Text, TouchableOpacity, View } from 'react-native';
-import { ScrollView, TextInput } from 'react-native-gesture-handler';
+import { Switch, Text, TouchableOpacity, View, ScrollView, TextInput } from 'react-native';
 import { setting } from '../../assets/styles/info';
 import { defaultStyle } from '../../assets/styles/defaultStyle';
 import { useState } from 'react';

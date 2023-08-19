@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, TextInput, ScrollView, FlatList, Modal, Pressable } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { Text, View, TextInput, ScrollView, FlatList, TouchableOpacity } from "react-native";
 
 import { defaultStyle } from "../../assets/styles/defaultStyle";
 import { addwords, addedList } from "../../assets/styles/addwords";

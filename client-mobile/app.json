@@ -21,7 +21,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/img/adaptive-icon2.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.qobulovasror.wordmemorization"
     },
     "web": {
       "favicon": "./assets/img/favicon.png"

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, TextInput, ScrollView, Switch } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { Text, View, TouchableOpacity } from "react-native";
 import Checkbox from 'expo-checkbox';
 import * as Speech from 'expo-speech';
 
