@@ -44,13 +44,16 @@ export const addedList = StyleSheet.create({
       margin: 10,
       zIndex: 9
     },
+    list: {
+      height: '75%'
+    },
     item: {
       padding: 10,
       borderRadius: 10,
       backgroundColor: '#fff',
       shadowColor:'#000',
       marginEnd: 20,
-      marginVertical: 10,
+      marginVertical: 10
     },
     itemName: {
       fontSize: 18,
@@ -96,5 +99,12 @@ export const addedList = StyleSheet.create({
       margin: 10,
       borderBottomWidth:.5,
       borderColor: "#ccc"
+    },
+    saveToDB: {
+      marginVertical: 10,
+      marginEnd: 15,
+      padding: 15,
+      borderRadius: 10,
+      backgroundColor: '#00f',
     }
 });

@@ -29,7 +29,6 @@ export const defaultStyle = StyleSheet.create({
     backgroundColor: "#fff",
   },
   switchBtn: {
-    width: "100%",
     padding: 10,
     borderRadius: 10,
     borderColor: "#000",

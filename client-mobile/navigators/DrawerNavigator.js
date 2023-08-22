@@ -28,7 +28,6 @@ export default function DrawerNavigator({token, setToken}) {
       <Drawer.Screen name="Sozlanmalar">
         {props => <Setting {...props} token={token} setToken={setToken} />}
       </Drawer.Screen>
-      {/* <Drawer.Screen name="Sozlanmalar" component={<Setting token={token} setToken={setToken}/>} /> */}
       <Drawer.Screen name="Fikr-mulohazalar" component={Feedback} />
       <Drawer.Screen name="Dastur haqida ma'lumot" component={Information} />
     </Drawer.Navigator>

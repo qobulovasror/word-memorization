@@ -24,13 +24,13 @@ export default function MainScreen({ navigation }) {
             <TouchableOpacity style={[defaultStyle.row, mainStyle.item]}
               onPress={()=>navigation.navigate("Bugungi so'zlarni o'rganish")}>
               <Feather name="refresh-ccw" size={25} color={"#00f"} />
-              <Text style={{marginStart: 10, fontSize: 20}}>Bugungi so'zlarni o'rganish</Text>
+              <Text style={{marginStart: 10, fontSize: 20}}>So'zlarni o'rganish va takrorlash</Text>
             </TouchableOpacity>
-            <View style={mainStyle.hr}></View>
-            <TouchableOpacity style={[defaultStyle.row, mainStyle.item]}>
+            {/* <View style={mainStyle.hr}></View> */}
+            {/* <TouchableOpacity style={[defaultStyle.row, mainStyle.item]}>
               <MaterialCommunityIcons name="repeat-variant" size={28} color={"#B0B900"} />
               <Text style={{marginStart: 10, fontSize: 20}}>Barcha so'zlarni takrorlash</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <View style={mainStyle.hr}></View>
             <TouchableOpacity style={[defaultStyle.row, mainStyle.item]}>
               <MaterialCommunityIcons name="list-status" size={28} color={"#EB4C42"} />

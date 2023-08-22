@@ -3,6 +3,7 @@ import { setting } from '../../assets/styles/info';
 import { defaultStyle } from '../../assets/styles/defaultStyle';
 import { useState } from 'react';
 import { deleteToken } from '../../services/tokenService';
+import { Feather } from '@expo/vector-icons';
 
 
 const Setting = ({setToken, token}) => {
@@ -33,7 +34,7 @@ const Setting = ({setToken, token}) => {
                     <View style={setting.group}>
                         <TextInput placeholder='Ism' style={setting.input} editable={false} defaultValue={token.name}/>
                         <TextInput placeholder='Email' style={setting.input} editable={false} defaultValue={token.email}/>
-                        <TouchableOpacity style={setting.sendBtn}>
+                        <TouchableOpacity style={setting.sendBtn} disabled>
                             <Text style={[defaultStyle.tCenter, {fontSize: 17, color: '#fff'}]}>Saqlash</Text>
                         </TouchableOpacity>
                     </View>
@@ -56,7 +57,13 @@ const Setting = ({setToken, token}) => {
                             <Switch/>
                         </View>
                         <View style={setting.hr}></View>
-                        <View style={[defaultStyle.row, defaultStyle.between]}>
+                        <TouchableOpacity style={setting.sendBtn}>
+                            <View style={[defaultStyle.row, defaultStyle.around]}>
+                                <Feather name='refresh-ccw' size={20} color={'#fff'}/>
+                                <Text style={{textAlign: 'center', fontSize: 17, color: '#fff'}}>Ma'lumotlarni sinxronlash</Text>
+                            </View>
+                        </TouchableOpacity>
+                        {/* <View style={[defaultStyle.row, defaultStyle.between]}>
                             <Text style={[setting.text, {paddingTop: 8, fontSize: 18}]}>Bildrishnomalar</Text>
                             <Switch/>
                         </View>
@@ -64,8 +71,8 @@ const Setting = ({setToken, token}) => {
                         <View style={[defaultStyle.row, defaultStyle.between]}>
                             <Text style={[setting.text, {paddingTop: 8, fontSize: 18}]}>Tebranish</Text>
                             <Switch/>
-                        </View>
-                    </View>
+                        </View>*/}
+                    </View> 
                     <TouchableOpacity style={[setting.sendBtn, {backgroundColor: '#fff', borderWidth: 0.5}]} onPress={()=>setModal(true)}>
                         <Text style={{color:'#f00', fontSize: 17, textAlign: 'center'}}>Logout</Text>
                     </TouchableOpacity>

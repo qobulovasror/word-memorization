@@ -50,7 +50,7 @@ const addWord = async (req, res) => {
             translation: req.body.translation,
             status: req.body.status,
             exampleText: req.body.exampleText,
-            exampleText: req.body.exampleMeaning,
+            exampleMeaning: req.body.exampleMeaning,
             userId: userId
         });
         word = await word.save();
