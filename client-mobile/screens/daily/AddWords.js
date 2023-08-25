@@ -19,6 +19,7 @@ export default function AddWords() {
       })
       .catch((err) => {
         alert(err);
+        console.log(err);
       });
   }
 

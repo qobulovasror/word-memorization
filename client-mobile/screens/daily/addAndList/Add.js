@@ -42,6 +42,7 @@ const Add = (props) => {
         }
       } catch (error) {
         alert(error);
+        console.log("add word", error);
       }
       setWord({
         name: "",

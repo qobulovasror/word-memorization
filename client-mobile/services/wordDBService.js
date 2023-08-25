@@ -3,7 +3,7 @@ import { db } from "./dbService";
 const createWordTable = () => {
   db.transaction((tx) => {
     tx.executeSql(
-      `CREATE TABLE word (
+      `CREATE TABLE IF NOT EXISTS words (
         id INTEGER PRIMARY KEY,
         name TEXT NOT NULL,
         status TEXT NOT NULL,
@@ -41,7 +41,7 @@ const getWords = () => {
   return new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
-        "SELECT * FROM words",
+        "SELECT * FROM words ORDER BY createdAt DESC",
         [],
         (tx, results) => {
           if (results.rows.length > 0) {
@@ -62,12 +62,7 @@ const getWords = () => {
   });
 };
 
-const getWordWidthParam = (
-  name = "",
-  status = "",
-  translation = "",
-  cretedAt = ""
-) => {
+const getWordWidthParam = (name, status, translation, cretedAt) => {
   let sqlQuery = "SELECT * FROM words WHERE ";
   let sqlParams = [];
   if (name) {
@@ -96,11 +91,11 @@ const getWordWidthParam = (
         sqlQuery,
         sqlParams,
         (tx, results) => {
-          if (results.rows.length > 0) {
-            resolve(results.rows.item(0).value);
-          } else {
-            resolve(null);
+          const words = [];
+          for (let i = 0; i < results.rows.length; i++) {
+            words.push(results.rows.item(i));
           }
+          resolve(words);
         },
         (error) => {
           reject(error);
@@ -110,9 +105,9 @@ const getWordWidthParam = (
   });
 };
 
-
 const updateWord = (params, id) => {
-  const { name, status, transcription, translation, example, exampleMeaning} = params;
+  const { name, status, transcription, translation, example, exampleMeaning } =
+    params;
   try {
     db.transaction((tx) => {
       tx.executeSql(
@@ -132,4 +127,11 @@ const deleteWord = (id) => {
   });
 };
 
-export { createWordTable, saveWord, getWords, deleteWord, getWordWidthParam, updateWord };
+export {
+  createWordTable,
+  saveWord,
+  getWords,
+  deleteWord,
+  getWordWidthParam,
+  updateWord,
+};
