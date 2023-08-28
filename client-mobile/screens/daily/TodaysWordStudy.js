@@ -6,7 +6,7 @@ import Repeatiton from "./learn/repeatiton";
 import Learn from './learn/learning'
 
 export default function TodaysWordStudy() {
-  const [mode, setMode] = useState("add");
+  const [mode, setMode] = useState("learn");
   const switchHandler = (mode) => {
     setMode(mode);
   };
@@ -18,22 +18,22 @@ export default function TodaysWordStudy() {
         style={[defaultStyle.row, defaultStyle.around, defaultStyle.switchMode]}
       >
         <TouchableOpacity
-          style={[defaultStyle.switchBtn, mode == "add" ? selectedStyle : ""]}
-          onPress={() => switchHandler("add")}
+          style={[defaultStyle.switchBtn, mode == "learn" ? selectedStyle : ""]}
+          onPress={() => switchHandler("learn")}
         >
           <Text>Bugungi so'zni o'rganish</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[
             defaultStyle.switchBtn,
-            mode == "addeddList" ? selectedStyle : "",
+            mode == "repeat" ? selectedStyle : "",
           ]}
-          onPress={() => switchHandler("addeddList")}
+          onPress={() => switchHandler("repeat")}
         >
           <Text>So'zlarni takrorlash</Text>
         </TouchableOpacity>
       </View>
-      {mode === "add" ? 
+      {mode === "learn" ? 
         <Learn /> : 
         <Repeatiton/>
       }

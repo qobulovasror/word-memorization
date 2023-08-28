@@ -19,7 +19,6 @@ export default function AddWords() {
       })
       .catch((err) => {
         alert(err);
-        console.log(err);
       });
   }
 
@@ -31,7 +30,6 @@ export default function AddWords() {
 
   useEffect(()=>{
     fetchData()
-    createWordTable()
   }, [])
   const selectedStyle = { backgroundColor: "#ccc", borderColor: "#fff" };
   return (

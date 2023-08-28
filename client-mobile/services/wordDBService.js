@@ -41,7 +41,7 @@ const getWords = () => {
   return new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
-        "SELECT * FROM words ORDER BY createdAt DESC",
+        "SELECT * FROM words",
         [],
         (tx, results) => {
           if (results.rows.length > 0) {
@@ -116,7 +116,6 @@ const updateWord = (params, id) => {
       );
     });
   } catch (error) {
-    console.log(error);
     alert(error);
   }
 };

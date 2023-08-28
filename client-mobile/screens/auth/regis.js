@@ -10,6 +10,7 @@ import { AntDesign } from "@expo/vector-icons";
 
 import { defaultStyle } from "../../assets/styles/defaultStyle";
 import { regisStyle } from "../../assets/styles/auth";
+import { loginStyle } from "../../assets/styles/auth";
 import { useState } from "react";
 import { emailIsValid } from "../../assets/utils/validator";
 import { setTokenToDB } from "../../services/tokenService";

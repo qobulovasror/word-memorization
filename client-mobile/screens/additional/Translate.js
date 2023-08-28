@@ -52,7 +52,6 @@ const Translate = () => {
         </View>
       )}
       <View style={translateCss.container}>
-        <View>{/* <Text style={styles.title}>Translator</Text> */}</View>
         <View style={translateCss.inputTxt}>
           <View style={[translateCss.row, translateCss.between]}>
             <Text>{fromTo[0]}</Text>

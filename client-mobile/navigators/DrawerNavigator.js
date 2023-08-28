@@ -12,6 +12,8 @@ import IrregularVerbs from "../screens/additional/IrregularVerbs";
 import Setting from "../screens/info/setting";
 import Feedback from "../screens/info/Feedback";
 import Information from "../screens/info/Information";
+import Memorized from "../screens/daily/memorized";
+import GrammerCheck from "../screens/additional/grammerCheck";
 
 const Drawer = createDrawerNavigator();
 
@@ -21,7 +23,9 @@ export default function DrawerNavigator({token, setToken}) {
       <Drawer.Screen name="Asosiy oyna" component={MainScreen} />
       <Drawer.Screen name="So'z qo'shish" component={AddWords} />
       <Drawer.Screen name="Bugungi so'zlarni o'rganish" component={TodaysWordStudy} />
+      <Drawer.Screen name="Yod olingan so'zlar" component={Memorized} />
       <Drawer.Screen name="Translate" component={Translate} />
+      <Drawer.Screen name="Gramatik tekshiruv" component={GrammerCheck} />
       <Drawer.Screen name="Noto'g'ri fe'llar" component={IrregularVerbs} />
       <Drawer.Screen name="Alifbo" component={Abc} />
       <Drawer.Screen name="Raqamlar" component={Nums} />

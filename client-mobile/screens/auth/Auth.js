@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import {SafeAreaView} from 'react-native';
 import { createTokenTable } from '../../services/tokenService';
+import { createWordTable } from '../../services/wordDBService';
 import Login from './login';
 import Regis from './regis';
-import { createWordTable } from '../../services/wordDBService';
 
 const Auth = ({setToken}) => {
     const [authMeth, setAuthMeth] = useState('login');
@@ -11,8 +11,8 @@ const Auth = ({setToken}) => {
   
   useEffect( () => {
     if (!initialized) {
-      createTokenTable();
       createWordTable();
+      createTokenTable();
       setInitialized(true);
     }
 
